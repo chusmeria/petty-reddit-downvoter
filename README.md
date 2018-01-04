@@ -20,5 +20,4 @@ Let's get petty with it!
     - Will add the ability to check ratelimit availability. The script only checks to see if the number of targets and the number of comments multiplied together will be greater than 600. The ratelimit as defined by the reddit API is 600 requests per minute. This is largely done because no one wants to wait 5 minutes just to downvote someone 300 times when there is no reason to wait.
 2. Submission downvotes.
     - The script will not downvote submissions, just comments. 
-3. Handle Infinity as part of the limits.
-    - Currently the limit requires a number and does not allow strings. This may not be something that is possible with yargs, but for now it'll do, pig; it'll do.
+3. Remove the number of console.logs for dates that are older than 30 days and include them in a single output.
