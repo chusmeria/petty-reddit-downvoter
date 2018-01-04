@@ -18,12 +18,14 @@ Let's get petty with it!
 
 # notes on functionality
 The current setup of PRD should avoid calls to comments older than 30 days. If all targets are downvoted successfully you'll get an stdout object letting you know the results of the PRD in an array called `messages` of objects structured as
-```{
+```
+{
     target: nameOfTarget,
     successfullyDownvoted: count,
         olderThanThirty: count of comments older than 30 days,
         fiveOhThreeErrors: count of 503 errors encountered while downvoting
-}```
+}
+```
 Please note that `messages[index].fiveOhThreeErrors` only includes a count of downvotes that threw 503s and not entire targets. If the entire target request throws a 503 error, stdout will print a message that says `There was a 503 error (reddit is busy) when trying to downvote gallowboob. Try getting petty with it later and make sure to spam the shit out of reddit admins in a pettyway about how bad their servers are.This is what was done before the error [messages]`. This is somewhat ugly because if you catch several 503 errors it makes the console messy. 
 
 # future updates
