@@ -1,0 +1,30 @@
+{
+  "name": "reddit-petty-downvoter",
+  "version": "1.0.0",
+  "description": "When someone you don't like on reddit annoys you, use this CLI to downvote all of their recent posts. Petty, right?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duranmitchell/petty-reddit-downvoter.git"
+  },
+  "keywords": [
+    "reddit",
+    "downvote",
+    "petty",
+    "revenge"
+  ],
+  "author": "Mike Duran-Mitchell",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/duranmitchell/petty-reddit-downvoter/issues"
+  },
+  "homepage": "https://github.com/duranmitchell/petty-reddit-downvoter#readme",
+  "dependencies": {
+    "moment": "^2.20.1",
+    "snoowrap": "^1.15.1",
+    "yargs": "^10.0.3"
+  }
+}
