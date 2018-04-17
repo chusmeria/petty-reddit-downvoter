@@ -39,39 +39,55 @@ const targets = argv.targets;
 
 let messages = [];
 
+let downvotePromises = [];
+
 let count = 0;
 
 const errorFiveOhThree =
   'StatusCodeError: 503 - "<!doctype html><html><title>Ow! -- reddit.com</title><style>body{text-align:center;position:absolute;top:50%;margin:0;margin-top:-275px;width:100%}h2,h3{color:#555;font:bold 200%/100px sans-serif;margin:0}h3,p{color:#777;font:normal 150% sans-serif}p{font-size: 100%;font-style:italic;margin-top:2em;}</style><img src=//www.redditstatic.com/trouble-afoot.jpg alt=""><h2>all of our servers are busy right now</h2><h3>please try again in a minute</h3><p>(error code: 503)';
 
-targets.forEach(async (target, index, array) => {
-  console.log(`Starting to downvote ${target}`);
-  messages.push({
-    target: target,
-    successfullyDownvoted: 0,
-    olderThanThirty: 0,
-    fiveOhThreeErrors: 0
+const getData = async () => {
+  const targetsToMap = await targets.map(async (target, index, array) => {
+    console.log(`Starting to downvote ${target}`);
+
+    messages.push({
+      target: target,
+      successfullyDownvoted: 0,
+      olderThanThirty: 0,
+      fiveOhThreeErrors: 0
+    });
+    await r
+      .getUser(target)
+      .getComments({ limit: argv.limit })
+      .then(comments =>
+        comments.map(comment => {
+          if (
+            moment.utc().diff(moment.unix(comment.created_utc), "days") > 30
+          ) {
+            ++messages[index].olderThanThirty;
+          } else {
+            downvotePromises.push(
+              r
+                .getComment(comment.id)
+                .downvote()
+                .then(++messages[index].successfullyDownvoted)
+                .catch(function(err) {
+                  ++messages[index].fiveOhThreeErrors;
+                })
+            );
+          }
+        })
+      )
+      .catch(console.log);
+
+    return messages;
   });
-  await r
-    .getUser(target)
-    .getComments({ limit: argv.limit })
-    .then(comments =>
-      comments.map(async comment => {
-        if (moment.utc().diff(moment.unix(comment.created_utc), "days") > 30) {
-          ++messages[index].olderThanThirty;
-        } else {
-          await r
-            .getComment(comment.id)
-            .downvote()
-            .then(++messages[index].successfullyDownvoted)
-            .catch(function(err) {
-              ++messages[index].fiveOhThreeErrors;
-            });
-        }
-      })
+
+  Promise.all(targetsToMap)
+    .then(downvotingResults =>
+      console.log("complete", new Set(downvotingResults[0]))
     )
-
     .catch(console.log);
+};
 
-  console.log(messages);
-});
+getData();
