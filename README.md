@@ -7,7 +7,19 @@ For those of us who enjoy things like [/r/pettyrevenge](https://www.reddit.com/r
 2. `cd petty-reddit-downvoter`
 3. `yarn` or `npm install`
 4. Add credentials in `client_credentials.json`
-	- If you do not have reddit credentials you can get your oauth2 client id and client secret using [Reddit's Guide](https://github.com/reddit/reddit/wiki/OAuth2)
+	- If you do not have reddit credentials you can get your oauth2 **client id** and **client secret** using [Reddit's Guide](https://github.com/reddit/reddit/wiki/OAuth2)
+	Below is an *example* on how your **script app** should look like on reddit:
+	
+	![example-app-img](https://github.com/PinkDev1/petty-reddit-downvoter/blob/master/example-app.jpg?raw=true)
+	
+	Once you have created the app, replace `verysecretClientID` with your client id (marked with a blue arrow on the image above) on the following URL:  `https://www.reddit.com/api/v1/authorize?client_id=verysecretClientID&response_type=code&duration=permanent&scope=vote&state=banana&redirect_uri=https://github.com/mike-duran-mitchell/petty-reddit-downvoter#Usage` and then go to it, and hit **allow**
+	
+	Once you've allowed it, replace the values in `client_credentials.json`
+	- The **client id** is marked with a **blue arrow** on the image
+	- The **cliend secret** is marked with an **orange arrow** on the image
+	- Your **username** is marked with a **green arrow** on the image
+	- Only you know your **password** *(hopefully)*
+	
 
 # Usage
 
