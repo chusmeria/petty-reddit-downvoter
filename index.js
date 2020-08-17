@@ -37,8 +37,8 @@ const r = new snoowrap(credentials);
 r.config({ retryErrorCodes: [503] });
 
 
-var targets = argv.targets
-var defaultTargets = []
+var targets = argv.targets;
+var defaultTargets = [];
 
 //If targets.default exists
 if (fs.existsSync("targets.default")) {
@@ -65,11 +65,6 @@ if (fs.existsSync("targets.default")) {
 let messages = [];
 
 let downvotePromises = [];
-
-let count = 0;
-
-const errorFiveOhThree =
-	'StatusCodeError: 503 - "<!doctype html><html><title>Ow! -- reddit.com</title><style>body{text-align:center;position:absolute;top:50%;margin:0;margin-top:-275px;width:100%}h2,h3{color:#555;font:bold 200%/100px sans-serif;margin:0}h3,p{color:#777;font:normal 150% sans-serif}p{font-size: 100%;font-style:italic;margin-top:2em;}</style><img src=//www.redditstatic.com/trouble-afoot.jpg alt=""><h2>all of our servers are busy right now</h2><h3>please try again in a minute</h3><p>(error code: 503)';
 
 const getData = async () => {
 	const targetsToMap = await targets.map(async (target, index, array) => {
