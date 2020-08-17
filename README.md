@@ -13,13 +13,13 @@ For those of us who enjoy things like [/r/pettyrevenge](https://www.reddit.com/r
 
 `node downvoter.js [--targets val1 val2] [-l 50]`
 
-`-t`/`--targets` target1 target2 target3
-This argument specifies users to downvote, separated by a space.
+`-t`/`--targets` target1 target2 target3    
+This argument specifies users to downvote, separated by a space.    
 DEFAULT: targets are loaded from `targets.default`.
 
-`-l`/`--limit` number
+`-l`/`--limit` number    
 Specifies how many comments will be downvoted.
-Remember that only comments made within the past month will be downvoted; See the future updates section below about expectations for better error handling and reporting in the future.
+Remember that only comments made within the past month will be downvoted; See the future updates section below about expectations for better error handling and reporting in the future.    
 DEFAULT: 50
 
 Example: `node index.js --targets F0REM4N spez gallowboob --limit 69`
